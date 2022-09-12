@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="container">
+        <a class="links" id="paracadastro"></a>
+        <a class="links" id="paralogin"></a>
+
+        <div class="content">
+            <div id="login">
+                <form method="post" action="">
+                    <h1>Login</h1>
+                    <p>
+                        <label for="email_login">Seu e-mail</label>
+                        <input id="email_login" name="email_login" required type="text" placeholder="ex. senha" />
+                    </p>
+                    <p>
+                        <label for="senha_login">Senha</label>
+                        <input id="senha_login" name="senha_login" required type="password" placeholder="********" />
+                    </p>
+                    <p>
+                        <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
+                        <label for="manterlogado">Manter-me logado</label>
+                    </p>
+                    <p>
+                        <button type="button" onclick="exibirDados()">Logar</button>
+                    </p>
+                    <p class="link">
+                        Ainda não tem conta?
+                        <a href="#paracadastro">Cadastre-se</a>
+                    </p>
+                </form>
+            </div>
+
+            <div id="cadastro">
+                <form method="post" action="/index.html" onsubmit="cadastrar()">
+                    <h1>Cadastro</h1>
+
+                    <p>
+                        <label for="nome_cad">Seu nome</label>
+                        <input id="nome_cad" name="nome_cad" required type="text" placeholder="nome" />
+                    </p>
+
+                    <p>
+                        <label for="email_cad">Seu e-mail</label>
+                        <input id="email_cad" name="email_cad" required type="email"
+                            placeholder="contato@htmlecsspro.com" />
+                    </p>
+
+                    <p>
+                        <label for="senha_cad">Sua senha</label>
+                        <input id="senha_cad" name="senha_cad" required type="password" placeholder="ex. 1234" />
+                    </p>
+
+                    <p>
+                        <input type="submit" onclick="" value="Cadastrar" />
+                    </p>
+
+                    <p class="link">
+                        Já tem conta?
+                        <a href="#paralogin"> Ir para Login </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function exibirDados() {
+            const email = document.getElementById('email_login').value;
+            const senha = document.getElementById('senha_login').value;
+            alert(`${email}\n${senha}`);
+        }
+
+        function cadastrar() {
+            this.event.preventDefault();
+
+            const nome = document.getElementById('nome_cad').value;
+            const email = document.getElementById('email_cad').value;
+            const senha = document.getElementById('senha_cad').value;
+
+            axios.post('http://localhost:5000/cadastro', {
+                nome, email, senha
+            }).then(response => {
+                console.log(response);
+            }).catch(err => {
+                console.log(err);
+            })
+
+        }
+    </script>
+</body>
+
+</html>
